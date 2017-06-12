@@ -1,0 +1,13 @@
+<!-- Main layout template -->
+<template name="layout">
+
+	<!-- Load header template. -->
+	{{> header}}
+
+	<!-- yield returns routes and templates from router.js. -->
+	{{> yield}}
+
+	<!-- Load footer template. -->
+	{{> footer}}
+
+</template>
