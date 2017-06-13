@@ -4,8 +4,9 @@
 
 Template.D3MatchStats.onRendered(function() {
 
-let width = window.innerWidth/3;
-let height = window.innerHeight/3;
+let margin = {top: 20, right: 10, bottom: 20, left: 10};
+let width = window.innerWidth/3 - margin.left - margin.right;
+let height = window.innerHeight/2 - margin.top - margin.bottom;
 
 let data = Stats.find().fetch()
 
@@ -23,8 +24,10 @@ let color = d3.scaleOrdinal(d3.schemeCategory10);
 
 let svg_window = d3.select("#canvas_match_stats")
   .append("svg")
-    .attr("width", width)
-    .attr("height", height);
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 svg_window.selectAll("circle")
   .data(data)
@@ -36,16 +39,17 @@ svg_window.selectAll("circle")
     .attr("fill", (d) => color(d.point_winner))
     .attr("opacity", 0.8)
   	.transition()
-  		// .delay(function (d, i){
-    //           return i * 25;  // Gives a slight delay with 25 ms spacing
-    //       })
+  		.delay(function (d, i){
+              return i * 25;  // Gives a slight delay with 25 ms spacing
+          })
   		.duration(1000)
+
      // d pour les données et i pour l'index. Intégré.
 	    .attr("cx", (d) => echelle_x(d.point_nb))
 	    .attr("cy", (d) => echelle_y(d.nb_rally))
 	    .attr("r", 3)
-	    .attr("fill", (d) => color(d.point_winner))
-	    .attr("opacity", 0.8);
+	  	.ease(d3.easeElastic);
+
 
 svg_window.append("g")
   .attr("transform",`translate(0,${height-20})`)
@@ -63,4 +67,18 @@ svg_window.append("text")
         .style("text-decoration", "underline")  
         .text("Point number vs number of rally");
 
+svg_window.append("text")
+    .attr("class", "x label")
+    .attr("text-anchor", "end")
+    .attr("x", width)
+    .attr("y", height + 10)
+    .text("point number");
+
+svg_window.append("text")
+    .attr("class", "y label")
+    .attr("text-anchor", "end")
+    .attr("y", 2)
+    .attr("dy", ".75em")
+    .attr("transform", "rotate(-90)")
+    .text("number of rally");
 });

@@ -4,7 +4,7 @@
 
 Template.D3PlayersStats.onRendered(function() {
 
-let width = 300;
+let width = 200;
 let height = 200;
 
 let data = Stats.find().fetch()
@@ -35,18 +35,66 @@ svg_window.selectAll("rect")
   .data(point_winner_count)
   .enter()
   .append("rect")
-  	.attr("y", height)
+  	.attr("y", height+50)
   	.attr("x", (d,i) => echelle_x(i))
-    .attr("width", width/point_winner_count.length)
+    .attr("width", width/point_winner_count.length - 5)
     .attr("height", 0)
     .attr("fill", (d) => color(d.key))
     .attr("opacity", 0.8)
   	.transition()
   		.duration(1000)
      // d pour les données et i pour l'index. Intégré.
-	    .attr("y", (d) => echelle_y(d.value))
+	    .attr("y", (d) => echelle_y(d.value)+50)
 	    .attr("height", (d) => height - echelle_y(d.value))
 	    .attr("fill", (d) => color(d.key))
 	    .attr("opacity", 0.8);
+
+svg_window.selectAll(".bars_numbers")
+  .data(point_winner_count)
+  .enter()
+	  .append("text")
+	  .attr("x", (d,i) => echelle_x(i))
+	  .attr("y", (d) => echelle_y(d.value)+55)
+	  .attr("dx", (width/point_winner_count.length - 5)/2)
+  	  .attr("dy", "1.2em")
+	  .attr("text-anchor", "middle")
+	  .text(function(d) { return d.value;})
+	  .attr("fill", "white")
+	  .attr("font-size", 0)
+	  .transition()
+	  	.delay(1000)
+  		.duration(200)
+  		.attr("font-size", "1.8em")
+  		.transition()
+	  		.duration(200)
+	  		.attr("font-size", "1.5em");
+
+svg_window.selectAll(".bars_text")
+  .data(point_winner_count)
+  .enter()
+	  .append("text")
+	  .attr("x", (d,i) => echelle_x(i))
+	  .attr("y", height - 30)
+	  .attr("dx", (width/point_winner_count.length - 5)/2)
+  	  .attr("dy", "1.2em")
+	  .attr("text-anchor", "middle")
+	  .text(function(d) { return d.key;})
+	  .attr("fill", "white")
+	  .attr("font-size", 0)
+	  .transition()
+	  	.delay(1000)
+  		.duration(200)
+  		.attr("font-size", "1.5em")
+  		.transition()
+	  		.duration(200)
+	  		.attr("font-size", "1.2em");
+
+svg_window.append("text")
+        .attr("x", (width / 2))             
+        .attr("y", 20)
+        .attr("text-anchor", "middle")  
+        .style("font-size", "16px") 
+        .style("text-decoration", "underline")  
+        .text("Total points won");
 
 });
