@@ -36,14 +36,14 @@ svg_window.selectAll("circle")
     .attr("fill", (d) => color(d.point_winner))
     .attr("opacity", 0.8)
   	.transition()
-  		.delay(function (d, i){
-              return i * 25;  // Gives a slight delay with 25 ms spacing
-          })
-  		.duration(500)
+  		// .delay(function (d, i){
+    //           return i * 25;  // Gives a slight delay with 25 ms spacing
+    //       })
+  		.duration(1000)
      // d pour les données et i pour l'index. Intégré.
 	    .attr("cx", (d) => echelle_x(d.point_nb))
 	    .attr("cy", (d) => echelle_y(d.nb_rally))
-	    .attr("r", 5)
+	    .attr("r", 3)
 	    .attr("fill", (d) => color(d.point_winner))
 	    .attr("opacity", 0.8);
 
@@ -54,5 +54,13 @@ svg_window.append("g")
 svg_window.append("g")
   .attr("transform",`translate(40,0)`)
   .call(axeY);
+
+svg_window.append("text")
+        .attr("x", (width / 2))             
+        .attr("y", 15)
+        .attr("text-anchor", "middle")  
+        .style("font-size", "16px") 
+        .style("text-decoration", "underline")  
+        .text("Point number vs number of rally");
 
 });
