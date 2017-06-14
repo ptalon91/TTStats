@@ -2,7 +2,7 @@
 
 // Events for D3Stats template.
 
-Template.D3PlayersHistTotal.onRendered(function() {
+Template.D3PlayersHistSets.onRendered(function() {
 
   let width = 200;
   let height = 200;
@@ -10,11 +10,11 @@ Template.D3PlayersHistTotal.onRendered(function() {
   let data = Stats.find().fetch()
 
   let point_winner_count = d3.nest()
-    .key(function(d) { return d.point_winner; })
+    .key(function(d) { return d.set; })
     .rollup(function(v) { return v.length; })
     .entries(data);
 
-    console.log(point_winner_count);
+console.log(point_winner_count);
 
   let echelle_x = d3.scaleLinear()
     .domain([0, point_winner_count.length])
@@ -26,7 +26,7 @@ Template.D3PlayersHistTotal.onRendered(function() {
 
   let color = d3.scaleOrdinal(d3.schemeCategory10);
 
-  let svg_window = d3.select("#canvas_players_stats")
+  let svg_window = d3.select("#canvas_players_hist_sets")
     .append("svg")
       .attr("width", width)
       .attr("height", height);
