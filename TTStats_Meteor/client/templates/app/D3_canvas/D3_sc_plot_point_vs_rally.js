@@ -11,7 +11,7 @@ Template.D3ScPlotPointVsRally.onRendered(function() {
   let data = Stats.find().fetch()
 
   let echelle_x = d3.scaleLinear()
-    .domain(d3.extent(data, d => d.point_nb)) // = données... demande le min et le max
+    .domain(d3.extent(data, d => d.point_no)) // = données... demande le min et le max
     .range([60, width-20])
 
   let echelle_y = d3.scaleLinear()
@@ -33,7 +33,7 @@ Template.D3ScPlotPointVsRally.onRendered(function() {
     .data(data)
     .enter()
     .append("circle")
-    	.attr("cx", (d) => echelle_x(d.point_nb))
+    	.attr("cx", (d) => echelle_x(d.point_no))
       .attr("cy", echelle_y(0))
       .attr("r", 0)
       .attr("fill", (d) => color(d.point_winner))
@@ -43,7 +43,7 @@ Template.D3ScPlotPointVsRally.onRendered(function() {
                 return i * 25;  // Gives a slight delay with 25 ms spacing
             })
     		.duration(1000)
-  	    .attr("cx", (d) => echelle_x(d.point_nb))
+  	    .attr("cx", (d) => echelle_x(d.point_no))
   	    .attr("cy", (d) => echelle_y(d.nb_rally))
   	    .attr("r", 3)
   	  	.ease(d3.easeElastic);
