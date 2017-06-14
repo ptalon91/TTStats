@@ -2,7 +2,7 @@
 
 // Events for D3Histogram template.
 
-Template.D3MatchStats.onRendered(function() {
+Template.D3ScPlotPointVsRally.onRendered(function() {
 
 let margin = {top: 20, right: 10, bottom: 20, left: 10};
 let width = window.innerWidth/3 - margin.left - margin.right;

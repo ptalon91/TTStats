@@ -2,7 +2,7 @@
 
 // Events for D3Stats template.
 
-Template.D3PlayersStats.onRendered(function() {
+Template.D3PlayersHistTotal.onRendered(function() {
 
 let width = 200;
 let height = 200;
