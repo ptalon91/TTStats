@@ -4,11 +4,11 @@
 
 Template.D3ScPlotPointVsRally.onRendered(function() {
 
+  let data = Stats.find().fetch()
+
   let margin = {top: 20, right: 10, bottom: 20, left: 10};
   let width = window.innerWidth/3 - margin.left - margin.right;
   let height = window.innerHeight/2 - margin.top - margin.bottom;
-
-  let data = Stats.find().fetch()
 
   let echelle_x = d3.scaleLinear()
     .domain(d3.extent(data, d => d.point_no)) // = données... demande le min et le max
