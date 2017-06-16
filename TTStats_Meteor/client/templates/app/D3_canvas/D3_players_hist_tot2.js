@@ -4,28 +4,6 @@
 
 Template.D3PlayersHistTotal.onRendered(function() {
 
-  var margin = {top: 20, right: 20, bottom: 20, left: 20},
-    padding = {top: 60, right: 60, bottom: 60, left: 60},
-    outerWidth = 400,
-    outerHeight = 300,
-    innerWidth = outerWidth - margin.left - margin.right,
-    innerHeight = outerHeight - margin.top - margin.bottom,
-    width = innerWidth - padding.left - padding.right,
-    height = innerHeight - padding.top - padding.bottom;
-
-  var svg_window = d3.select("body").append("svg")
-      .attr("width", outerWidth)
-      .attr("height", outerHeight)
-      .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-  svg_window.append("rect")
-      .attr("width", "100%")
-      .attr("height", "100%")
-      .attr("fill", "pink");
-
-  let color = d3.scaleOrdinal(d3.schemeCategory10);
-
   let data = Stats.find({match_no: 1}).fetch();
   let nb_sets = Stats.findOne({match_no: 1}, {sort: {set: -1} }).set;
 
@@ -51,31 +29,55 @@ Template.D3PlayersHistTotal.onRendered(function() {
     }
   }
 
+  let margin = {top: 20, right: 20, bottom: 20, left: 20},
+    padding = {top: 60, right: 20, bottom: 30, left: 20},
+    outerWidth = 400,
+    outerHeight = 300,
+    innerWidth = outerWidth - margin.left - margin.right,
+    innerHeight = outerHeight - margin.top - margin.bottom,
+    width = innerWidth - padding.left - padding.right,
+    height = innerHeight - padding.top - padding.bottom,
+    between_players_bar_dist = 2,
+    between_sets_bar_dist = 10;
+
+  let svg_window = d3.select("body").append("svg")
+      .attr("width", innerWidth + nb_sets*between_sets_bar_dist + nb_sets*between_players_bar_dist)
+      .attr("height", innerHeight)
+      .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  svg_window.append("rect")
+      .attr("width", "100%")
+      .attr("height", "100%")
+      .attr("fill", "lightgrey");
+
+  let color = d3.scaleOrdinal(d3.schemeCategory10);
+
   for(index=0;index<nb_sets;index++){
 
   let echelle_x = d3.scaleLinear()
     .domain([0, sets_list[index].length])
-    .range([0, innerWidth/nb_sets]);
+    .range([0, width/nb_sets]);
 
   let echelle_y = d3.scaleLinear()
     .domain([0, max])// = données... demande le min et le max
-    .range([innerHeight, 0]);
+    .range([height, 0]);
 
   svg_window.selectAll(`rect${index}`)
     .data(sets_list[index])
     .enter()
     .append("rect")
-     .attr("y", innerHeight)
-     .attr("x", (d,i) => echelle_x(i) + (index)*innerWidth/nb_sets + index*20)
-      .attr("width", innerWidth/sets_list[index].length/nb_sets -2)
+     .attr("y", height + padding.top)
+     .attr("x", (d,i) => padding.left + echelle_x(i) + (index)*width/nb_sets + index*between_sets_bar_dist)
+      .attr("width", (width/sets_list[index].length)/nb_sets - between_players_bar_dist)
       .attr("height", 0)
       .attr("fill", (d) => color(d.key))
       .attr("opacity", 0.8)
      .transition()
        .duration(1000)
        // d pour les données et i pour l'index. Intégré.
-       .attr("y", (d) => echelle_y(d.value))
-       .attr("height", (d) => innerHeight - echelle_y(d.value))
+       .attr("y", (d) => echelle_y(d.value) + padding.top)
+       .attr("height", (d) => height - echelle_y(d.value))
        .attr("fill", (d) => color(d.key))
        .attr("opacity", 0.8);
 
@@ -83,9 +85,9 @@ Template.D3PlayersHistTotal.onRendered(function() {
     .data(sets_list[index])
     .enter()
      .append("text")
-     .attr("x", (d,i) => echelle_x(i) + (index)*width/nb_sets + index*20)
-     .attr("y", (d) => echelle_y(d.value))
-     .attr("dx", (width/sets_list[index].length/nb_sets - 2)/2)
+     .attr("x", (d,i) => padding.left + echelle_x(i) + (index)*width/nb_sets + index*between_sets_bar_dist)
+     .attr("y", (d) => echelle_y(d.value) + padding.top)
+     .attr("dx", (width/sets_list[index].length/nb_sets - between_players_bar_dist)/2)
      .attr("dy", "1.2em")
      .attr("text-anchor", "middle")
      .text(function(d) { return d.value;})
@@ -99,18 +101,17 @@ Template.D3PlayersHistTotal.onRendered(function() {
          .duration(200)
          .attr("font-size", "1.2em");
 
-            svg_window.selectAll(".sets_numbers")
+  svg_window.selectAll(".sets_numbers")
     .data(set_no_list)
     .enter()
       .append("text")
-      .attr("x", (d,i) => echelle_x(i) + i*250/nb_sets + 30)
-      .attr("y", -28)
+      .attr("x", (d,i) => padding.left + echelle_x(i) + i*212/nb_sets + 30)
+      .attr("y", 35)
       .attr("dy", "1.2em")
       .attr("text-anchor", "middle")
       .text(function(d) { return d;})
       .attr("fill", "black")
-      .attr("font-size", "1em")
-      .style("text-decoration", "underline"); 
+      .attr("font-size", "1em"); 
 }
   // svg_window.selectAll(".bars_text")
   //   .data(sets_list[index])
@@ -133,12 +134,11 @@ Template.D3PlayersHistTotal.onRendered(function() {
   //         .attr("font-size", "1.2em");
 
   svg_window.append("text")
-    .attr("x", (width / 2)+42)             
-    .attr("y", -35)
+    .attr("x", (width / 2)+40)             
+    .attr("y", 25)
     .attr("text-anchor", "middle")
     .attr("fill", "black")  
-    .style("font-size", "1.5em") 
-    .style("text-decoration", "underline")  
-    .text("Sets");
+    .style("font-size", "1.5em")  
+    .text("Point per set");
 
 })
