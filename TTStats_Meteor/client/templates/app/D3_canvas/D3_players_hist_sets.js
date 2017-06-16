@@ -6,7 +6,7 @@ Template.D3PlayersHistSets.onRendered(function() {
 
   let margin = {top: 55, right: 80, bottom: 0, left: 0};
   let width = 300;
-  let height = 145;
+  let height = 195;
 
   let svg_window = d3.select("#canvas_players_hist_sets")
     .append("svg")
@@ -14,7 +14,7 @@ Template.D3PlayersHistSets.onRendered(function() {
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-  
+
   let color = d3.scaleOrdinal(d3.schemeCategory10);
 
   let data = Stats.find({match_no: 1}).fetch();
@@ -25,11 +25,6 @@ Template.D3PlayersHistSets.onRendered(function() {
   for(i=1; i<=nb_sets; i++){
     set_no_list.push(i);
   }
-
-  // let point_winner_count = d3.nest()
-  //   .key(function(d) { return d.set; })
-  //   .rollup(function(v) { return v.length; })
-  //   .entries(data);
 
   let point_winner_count = d3.nest()
   .key(function(d) { return d.set; })
@@ -47,15 +42,6 @@ Template.D3PlayersHistSets.onRendered(function() {
     }
   }
 
-  // alert(sets_list)
-  // let set1_points_count = point_winner_count["0"].values;
-  // let set2_points_count = point_winner_count["1"].values;
-  // let set3_points_count = point_winner_count["2"].values;
-  // let set4_points_count = point_winner_count["3"].values;
-  // let set5_points_count = point_winner_count["4"].values;
-
-
-
   for(index=0;index<nb_sets;index++){
 
   let echelle_x = d3.scaleLinear()
@@ -70,9 +56,9 @@ Template.D3PlayersHistSets.onRendered(function() {
     .data(sets_list[index])
     .enter()
     .append("rect")
-    	.attr("y", height-50)
+    	.attr("y", height)
     	.attr("x", (d,i) => echelle_x(i) + (index)*width/nb_sets + index*20)
-      .attr("width", width/sets_list[index].length/nb_sets - 5)
+      .attr("width", width/sets_list[index].length/nb_sets - 2)
       .attr("height", 0)
       .attr("fill", (d) => color(d.key))
       .attr("opacity", 0.8)
@@ -90,7 +76,7 @@ Template.D3PlayersHistSets.onRendered(function() {
   	  .append("text")
   	  .attr("x", (d,i) => echelle_x(i) + (index)*width/nb_sets + index*20)
   	  .attr("y", (d) => echelle_y(d.value))
-  	  .attr("dx", (width/sets_list[index].length/nb_sets - 5)/2)
+  	  .attr("dx", (width/sets_list[index].length/nb_sets - 2)/2)
     	.attr("dy", "1.2em")
   	  .attr("text-anchor", "middle")
   	  .text(function(d) { return d.value;})
@@ -104,44 +90,25 @@ Template.D3PlayersHistSets.onRendered(function() {
   	  		.duration(200)
   	  		.attr("font-size", "1.2em");
 
-            svg_window.selectAll(".sets_numbers")
+   svg_window.selectAll(".sets_numbers")
     .data(set_no_list)
     .enter()
       .append("text")
       .attr("x", (d,i) => echelle_x(i) + i*250/nb_sets + 30)
-      .attr("y", -30)
+      .attr("y", -28)
       .attr("dy", "1.2em")
       .attr("text-anchor", "middle")
       .text(function(d) { return d;})
       .attr("fill", "black")
-      .attr("font-size", "1.2em")
+      .attr("font-size", "1em")
 }
-  // svg_window.selectAll(".bars_text")
-  //   .data(sets_list[index])
-  //   .enter()
-  // 	  .append("text")
-  // 	  .attr("x", (d,i) => echelle_x(i))
-  // 	  .attr("y", height - 30)
-  // 	  .attr("dx", (width/sets_list[index].length/nb_sets - 5)/2)
-  //   	.attr("dy", "1.2em")
-  // 	  .attr("text-anchor", "middle")
-  // 	  .text(function(d) { return d.key;})
-  // 	  .attr("fill", "white")
-  // 	  .attr("font-size", 0)
-  // 	  .transition()
-  // 	  	.delay(1000)
-  //   		.duration(200)
-  //   		.attr("font-size", "1.5em")
-  //   		.transition()
-  // 	  		.duration(200)
-  // 	  		.attr("font-size", "1.2em");
 
   svg_window.append("text")
-    .attr("x", (width / 2)+50)             
-    .attr("y", -40)
-    .attr("text-anchor", "middle")  
-    .style("font-size", "16px") 
-    .style("text-decoration", "underline")  
+    .attr("x", (width / 2)+42)             
+    .attr("y", -35)
+    .attr("text-anchor", "middle")
+    .attr("fill", "black")  
+    .style("font-size", "1.5em")  
     .text("Sets");
 
 
