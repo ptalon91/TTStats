@@ -42,7 +42,9 @@ Template.D3MatchInfo.onRendered(function() {
   	let svg_window = d3.select("#canvas_players")
     .append("svg")
       .attr("width", width)
-      .attr("height", height);
+      .attr("height", height)
+      .append("g")
+	    .attr("transform", "translate(" + -25 + "," + 0 + ")");
 
 	svg_window.selectAll("circle")
 	    .data(data)
@@ -58,22 +60,30 @@ Template.D3MatchInfo.onRendered(function() {
 	  	    .attr("r", 60)
 	  	  	.ease(d3.easeElastic);
 
-	  svg_window.selectAll(".bars_text")
-    .data(data)
-    .enter()
-  	  .append("text")
-  	  .attr("x", (d,i) => (width/(i+1)) - width/4)
-  	  .attr("y", height/2 - 12)
-  	  // .attr("dx", (width/point_winner_count.length - 5)/2)
-      .attr("dy", "1.2em")
-  	  .attr("text-anchor", "middle")
-  	  .text(function(d) { return d})
-  	  .attr("fill", "white")
-  	  .attr("font-size", 0)
-  	  .transition()
-    		.duration(1000)
-  	  		.attr("font-size", "1.2em")
-  	  		.ease(d3.easeElastic);;
+	svg_window.selectAll(".bars_text")
+	    .data(data)
+	    .enter()
+	  	  .append("text")
+	  	  .attr("x", (d,i) => (width/(i+1)) - width/4)
+	  	  .attr("y", height/2 - 15)
+	  	  // .attr("dx", (width/point_winner_count.length - 5)/2)
+	      .attr("dy", "1.2em")
+	  	  .attr("text-anchor", "middle")
+	  	  .text(function(d) { return d})
+	  	  .attr("fill", "white")
+	  	  .attr("font-size", 0)
+	  	  .transition()
+	    		.duration(1000)
+	  	  		.attr("font-size", "1.2em")
+	  	  		.ease(d3.easeElastic);
+
+	svg_window.append("text")
+	    .attr("x", width/2)             
+	    .attr("y", height/2 + 10)
+	    .attr("text-anchor", "middle")
+	    .attr("fill", "black")  
+	    .style("font-size", "1.5em")  
+	    .text("VS");
 
 
 });
