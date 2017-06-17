@@ -15,7 +15,15 @@ Template.D3PlayersHistSets.onRendered(function() {
       .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  let color = d3.scaleOrdinal(d3.schemeCategory10);
+  let players_name = [
+        Stats.findOne({match_no: 1}).player1[0].name,
+        Stats.findOne({match_no: 1}).player2[0].name
+      ];
+
+  let colors ={};
+        
+  colors[players_name[0]] = Stats.findOne({match_no: 1}).player1[0].color;
+  colors[players_name[1]] = Stats.findOne({match_no: 1}).player2[0].color
 
   let data = Stats.find({match_no: 1}).fetch();
   let nb_sets = Stats.findOne({match_no: 1}, {sort: {set: -1} }).set;
@@ -42,6 +50,8 @@ Template.D3PlayersHistSets.onRendered(function() {
     }
   }
 
+console.log(sets_list)
+
   for(index=0;index<nb_sets;index++){
 
   let echelle_x = d3.scaleLinear()
@@ -60,14 +70,13 @@ Template.D3PlayersHistSets.onRendered(function() {
     	.attr("x", (d,i) => echelle_x(i) + (index)*width/nb_sets + index*20)
       .attr("width", width/sets_list[index].length/nb_sets - 2)
       .attr("height", 0)
-      .attr("fill", (d) => color(d.key))
+      .attr("fill", (d) => colors[d.key])
       .attr("opacity", 0.8)
     	.transition()
     		.duration(1000)
        // d pour les données et i pour l'index. Intégré.
   	    .attr("y", (d) => echelle_y(d.value))
   	    .attr("height", (d) => height - echelle_y(d.value))
-  	    .attr("fill", (d) => color(d.key))
   	    .attr("opacity", 0.8);
 
   svg_window.selectAll(".bars_numbers")

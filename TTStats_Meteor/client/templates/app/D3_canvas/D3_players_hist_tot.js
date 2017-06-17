@@ -22,7 +22,15 @@ Template.D3PlayersHistTotal.onRendered(function() {
     .domain([0, d3.max(point_winner_count, d => d.value)])// = données... demande le min et le max
     .range([height, 0])
 
-  let color = d3.scaleOrdinal(d3.schemeCategory10);
+  let players_name = [
+        Stats.findOne({match_no: 1}).player1[0].name,
+        Stats.findOne({match_no: 1}).player2[0].name
+      ];
+
+  let colors ={};
+        
+  colors[players_name[0]] = Stats.findOne({match_no: 1}).player1[0].color;
+  colors[players_name[1]] = Stats.findOne({match_no: 1}).player2[0].color
 
   let svg_window = d3.select("#canvas_players_stats")
     .append("svg")
@@ -37,14 +45,13 @@ Template.D3PlayersHistTotal.onRendered(function() {
     	.attr("x", (d,i) => echelle_x(i))
       .attr("width", width/point_winner_count.length - 5)
       .attr("height", 0)
-      .attr("fill", (d) => color(d.key))
+      .attr("fill", (d) => colors[d.key])
       .attr("opacity", 0.8)
     	.transition()
     		.duration(1000)
        // d pour les données et i pour l'index. Intégré.
   	    .attr("y", (d) => echelle_y(d.value)+60)
   	    .attr("height", (d) => height - echelle_y(d.value))
-  	    .attr("fill", (d) => color(d.key))
   	    .attr("opacity", 0.8);
 
   svg_window.selectAll(".bars_numbers")
