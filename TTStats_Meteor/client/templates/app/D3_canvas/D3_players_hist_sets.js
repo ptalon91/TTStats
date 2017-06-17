@@ -85,10 +85,10 @@ Template.D3PlayersHistSets.onRendered(function() {
   	  .transition()
   	  	.delay(1000)
     		.duration(200)
-    		.attr("font-size", "1.5em")
+    		.attr("font-size", "1em")
     		.transition()
   	  		.duration(200)
-  	  		.attr("font-size", "1.2em");
+  	  		.attr("font-size", "0.9em");
 
    svg_window.selectAll(".sets_numbers")
     .data(set_no_list)
