@@ -31,8 +31,10 @@ Template.D3MatchInfo.helpers({
 Template.D3MatchInfo.onRendered(function() {
 
 	let data = [];
-	data.push(Stats.findOne({match_no: 1}).player1);
+	
 	data.push(Stats.findOne({match_no: 1}).player2);
+	data.push(Stats.findOne({match_no: 1}).player1);
+
 
 	let width = 400;
   	let height = width/3;
