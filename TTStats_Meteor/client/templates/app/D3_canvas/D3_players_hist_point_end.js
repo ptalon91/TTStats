@@ -103,7 +103,7 @@ Template.D3PlayersHistPointEnd.onRendered(function() {
     .attr("text-anchor", "middle")
     .attr("fill", "black")  
     .style("font-size", "1.5em")  
-    .text("Point win reasons");
+    .text("Points scoring types");
 
 
 });

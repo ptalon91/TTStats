@@ -109,7 +109,7 @@ Template.D3PlayersHistSets.onRendered(function() {
     .attr("text-anchor", "middle")
     .attr("fill", "black")  
     .style("font-size", "1.5em")  
-    .text("Sets");
+    .text("Points scored per set and player");
 
 
 });

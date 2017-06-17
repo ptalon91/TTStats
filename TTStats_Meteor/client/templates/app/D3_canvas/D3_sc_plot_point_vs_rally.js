@@ -63,14 +63,14 @@ Template.D3ScPlotPointVsRally.onRendered(function() {
     .attr("text-anchor", "middle")  
     .style("font-size", "16px") 
     .style("text-decoration", "underline")  
-    .text("Point number vs number of rally");
+    .text("Point number vs length of rally");
 
   svg_window.append("text")
     .attr("class", "x label")
     .attr("text-anchor", "end")
     .attr("x", width)
     .attr("y", height + 10)
-    .text("point number");
+    .text("Point number");
 
   svg_window.append("text")
     .attr("class", "y label")
@@ -78,5 +78,5 @@ Template.D3ScPlotPointVsRally.onRendered(function() {
     .attr("y", 2)
     .attr("dy", ".75em")
     .attr("transform", "rotate(-90)")
-    .text("number of rally");
+    .text("Length of rally");
 });

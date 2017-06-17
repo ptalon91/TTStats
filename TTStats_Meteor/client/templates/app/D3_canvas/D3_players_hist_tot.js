@@ -92,5 +92,5 @@ Template.D3PlayersHistTotal.onRendered(function() {
     .attr("y", 30)
     .attr("text-anchor", "middle")  
     .style("font-size", "1.2em")  
-    .text("Nombre de points gagnés");
+    .text("Points scored per player");
 });
