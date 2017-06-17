@@ -11,9 +11,12 @@ Router.configure({
 	// waitOn, allows to show "loading..." when loading the data from the publications, so the user knows something is happening.
 	waitOn: function() {
 
-		$.getScript('https://d3js.org/d3.v4.min.js');
+		;
 		// SUbscription to pixels collection.
-		return Meteor.subscribe('stats');
+		return [
+			Meteor.subscribe('stats'),
+			IRLibLoader.load('https://d3js.org/d3.v4.min.js')
+		]
 	}
 });
 
