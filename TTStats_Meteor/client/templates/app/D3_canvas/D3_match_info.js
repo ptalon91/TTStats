@@ -30,36 +30,14 @@ Template.D3MatchInfo.helpers({
 
 Template.D3MatchInfo.onRendered(function() {
 
-	let data = [
-				Stats.findOne({match_no: 1}).player1,
-				Stats.findOne({match_no: 1}).player2
-		];
-
-
-	function flatten(arr) {
-
-	  var flatArray = [];
-
-	  function pushLoop(a) {
-	    var len = a.length;
-	    var i=0;
-	    for (i; i < len; i++) {
-	      if (a[i] && a[i].constructor == Array) {
-	        pushLoop(a[i]);
-	      } else {
-	        flatArray.push(a[i]);
-	      }
-	    }
-	  }
-
-	  pushLoop(arr);
-	  return flatArray;
-	}
-
-	flatten_data = flatten(data)
+	let data = [];
+	data.push(Stats.findOne({match_no: 1}).player1);
+	data.push(Stats.findOne({match_no: 1}).player2);
 
 	let width = 400;
   	let height = width/3;
+
+  	let color = d3.scaleOrdinal(d3.schemeCategory10);
 
   	let svg_window = d3.select("#canvas_players")
     .append("svg")
@@ -69,13 +47,13 @@ Template.D3MatchInfo.onRendered(function() {
 	    .attr("transform", "translate(" + -25 + "," + 0 + ")");
 
 	svg_window.selectAll("circle")
-	    .data(flatten_data)
+	    .data(data)
 	    .enter()
 	    .append("circle")
 	      .attr("cx", (d,i) => (width/(i+1)) - width/4)
 	      .attr("cy", height/2)
 	      .attr("r", 0)
-	      .attr("fill", (d, i) => d.color)
+	      .attr("fill", (d) => color(d))
 	      .attr("opacity", 0.8)
 	    	.transition()
 	    	.duration(1000)
@@ -83,7 +61,7 @@ Template.D3MatchInfo.onRendered(function() {
 	  	  	.ease(d3.easeElastic);
 
 	svg_window.selectAll(".bars_text")
-	    .data(flatten_data)
+	    .data(data)
 	    .enter()
 	  	  .append("text")
 	  	  .attr("x", (d,i) => (width/(i+1)) - width/4)
@@ -91,7 +69,7 @@ Template.D3MatchInfo.onRendered(function() {
 	  	  // .attr("dx", (width/point_winner_count.length - 5)/2)
 	      .attr("dy", "1.2em")
 	  	  .attr("text-anchor", "middle")
-	  	  .text(function(d) { return d.name})
+	  	  .text(function(d) { return d})
 	  	  .attr("fill", "white")
 	  	  .attr("font-size", 0)
 	  	  .transition()

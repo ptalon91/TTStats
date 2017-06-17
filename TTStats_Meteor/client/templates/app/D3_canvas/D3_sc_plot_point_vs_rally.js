@@ -18,16 +18,6 @@ Template.D3ScPlotPointVsRally.onRendered(function() {
     .domain(d3.extent(data, d => d.nb_rally))// = données... demande le min et le max
     .range([height-40, 40])
 
-  let players_name = [
-        Stats.findOne({match_no: 1}).player1[0].name,
-        Stats.findOne({match_no: 1}).player2[0].name
-      ];
-
-  let colors ={};
-        
-  colors[players_name[0]] = Stats.findOne({match_no: 1}).player1[0].color;
-  colors[players_name[1]] = Stats.findOne({match_no: 1}).player2[0].color
-
   let axeX = d3.axisBottom(echelle_x);
   let axeY = d3.axisLeft(echelle_y);
   let color = d3.scaleOrdinal(d3.schemeCategory10);
@@ -46,7 +36,7 @@ Template.D3ScPlotPointVsRally.onRendered(function() {
     	.attr("cx", (d) => echelle_x(d.point_no))
       .attr("cy", echelle_y(0))
       .attr("r", 0)
-      .attr("fill", (d) => colors[d.point_winner])
+      .attr("fill", (d) => color(d.point_winner))
       .attr("opacity", 0.8)
     	.transition()
     		.delay(function (d, i){
