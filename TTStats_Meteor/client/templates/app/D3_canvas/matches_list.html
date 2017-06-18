@@ -1,0 +1,8 @@
+<template name="matchesList">
+	<div class="matches">
+		<!--For each users returned by the helper, use template userItem.-->
+		{{#each matches}}
+			{{> matchItem}}
+		{{/each}} 
+	</div>
+</template>

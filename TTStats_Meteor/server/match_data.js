@@ -1,4 +1,4 @@
-// Insert match data into db.
+// Insert match data into MongoDB.
 if (Stats.find().count() === 0){
 
   Stats.insert({

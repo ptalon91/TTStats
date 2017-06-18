@@ -1,11 +1,14 @@
-<!-- D3 canvas template -->
+<!-- D3 match info template -->
 <template name="D3MatchInfo">
 
 	<div class="col-md-4" id="canvas_match_info">
 		<div class="jumbotron text-center">
+			<!-- Get values from helpers -->
 			<h2> <b>Match {{match_no}}</b></h2>
-			<div id ="canvas_players"> 
-			</div>
+				<!-- Define canvas for D3 figures. -->
+				<div id ="canvas_players"> 
+				</div>
+			<!-- Get values from helpers -->
 			<h3> {{nb_sets}} sets <br>
 			{{nb_points}} points played <br> <br>
 			<b>Winner is {{match_winner}} !</b></h3>
