@@ -18,11 +18,11 @@ Installation and instructions: https://www.meteor.com/
 1. Conceive an efficient database. Here, the data was not collected from a real Table tennis match (time consuming...), but randomly generated.
 2. Conceive and create a simple, modular and efficient layout thanks to the templating system of Meteor.
 3. Get data from the MongoDB database and generate D3 plots and histograms showing particularities of the match statistics:
-	3a. Scatter plot showing the point number (-> time dimension) versus the length of rally.
-	3b. Histogram showing total of points scored by each player.
-	3c. Histogram showing total of points scored by each player during each set.
-	3d. Histogram showing total of points scored by each player and by type of scoring (in, out, etc...).
-	3e. "Box" containing general information about the match.
+  1. Scatter plot showing the point number (-> time dimension) versus the length of rally.
+  2. Histogram showing total of points scored by each player.
+  3. Histogram showing total of points scored by each player during each set.
+  4. Histogram showing total of points scored by each player and by type of scoring (in, out, etc...).
+  5. "Box" containing general information about the match.
 4. Integrate visual effects and animations to the graphs.
 5. Integrate these graphs to the Meteor environment.
 
