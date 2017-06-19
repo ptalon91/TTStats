@@ -65,7 +65,9 @@ Note: D3 v.4 is not available yet as a proper package for Meteor (only D3 v.3). 
 
 ## Technical difficulties
 The first challenge of this project was the conception of the database, as most of the development process depends on its architecture. Here, a simple "per point document" was a good way to do it, but there are probably more efficient ways. The second difficulty was to get data from the database, and especially to preprocess it for D3 requirements. D3's nesting tool was of a particular help in this case, allowing an easy counting of occurrences (points scored per player and per set...).
+
 D3 is available as a package for Meteor, but not the last version (v.4). I decided therefore to integrate the library from the external and official source code of D3.js. This step took a good amount of time as there was some conflicts in terms of loading priorities, and D3.js was most of the time not ready on time for the plots' generation. This problem was solved thanks to the package "manuelschoebel:wait-on-lib".
+
 Bootstrap is a very useful library for reactive web layout, but it was difficult to deal at the same time with D3 graphs' attributes. Current result is that D3 elements are rearranging their positions on the page for smaller resolutions, but not their size and margins.
 
 ## Conclusions
