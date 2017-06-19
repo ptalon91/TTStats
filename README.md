@@ -15,22 +15,22 @@ Installation and instructions: https://www.meteor.com/
 # Data
 Data of a table tennis match.
 Description of the fields:
-	- match_no: match number.
-    - player1: "name of player 1".
-    - player2: "name of player 2".
-    - point_no: point number, to identify every points played.
-    - set: total number of sets played during the match.
-    - point_server: "name of player who serves during this point".
-    - point_winner: "name of player who wins this point".
-    - P1_score: score of player 1 at this point (progressive).
-    - P2_score: score of player 2 at this point (progressive).
-    - serve_net: number of "serve nets" during this point.
-    - nb_rally: length of rally for this point.
-    - point_end: type of point scoring:
-    		"in" if winner of the point scores returns a valid the ball and the opponent doesn't touch it.
-    		"out" if opponent's return doesn't touch the point winner's table side.
-    		"ace" if point winner makes a valid serve and opponent doesn't touch the ball.
-    		"serve" if opponent fails his serve.
+- match_no: match number.
+- player1: "name of player 1".
+- player2: "name of player 2".
+- point_no: point number, to identify every points played.
+- set: total number of sets played during the match.
+- point_server: "name of player who serves during this point".
+- point_winner: "name of player who wins this point".
+- P1_score: score of player 1 at this point (progressive).
+- P2_score: score of player 2 at this point (progressive).
+- serve_net: number of "serve nets" during this point.
+- nb_rally: length of rally for this point.
+- point_end: type of point scoring:
+	"in" if winner of the point scores returns a valid the ball and the opponent doesn't touch it.
+	"out" if opponent's return doesn't touch the point winner's table side.
+	"ace" if point winner makes a valid serve and opponent doesn't touch the ball.
+	"serve" if opponent fails his serve.
 
 # Meteor packages and other JS libraries
 Meteor packages:
