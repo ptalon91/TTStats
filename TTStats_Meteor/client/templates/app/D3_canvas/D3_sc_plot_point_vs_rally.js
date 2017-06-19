@@ -54,7 +54,7 @@ Template.D3ScPlotPointVsRally.onRendered(function() {
     		.duration(1000)
   	    .attr("cx", (d) => echelle_x(d.point_no))
   	    .attr("cy", (d) => echelle_y(d.nb_rally))
-  	    .attr("r", 3)
+  	    .attr("r", 5)
         // Elastic effect.
   	  	.ease(d3.easeElastic);
 
@@ -73,9 +73,9 @@ Template.D3ScPlotPointVsRally.onRendered(function() {
     .attr("x", (width / 2))             
     .attr("y", 15)
     .attr("text-anchor", "middle")  
-    .style("font-size", "16px") 
+    .style("font-size", "18px") 
     .style("text-decoration", "underline")  
-    .text("Point number vs length of rally");
+    .text("Scored point vs length of rally");
 
   // Add x axis label to the plot.
   svg_window.append("text")
@@ -83,6 +83,7 @@ Template.D3ScPlotPointVsRally.onRendered(function() {
     .attr("text-anchor", "end")
     .attr("x", width)
     .attr("y", height + 10)
+    .style("font-size", "14px") 
     .text("Point number");
 
   // Add y axis label to the plot.
@@ -92,5 +93,6 @@ Template.D3ScPlotPointVsRally.onRendered(function() {
     .attr("y", 2)
     .attr("dy", ".75em")
     .attr("transform", "rotate(-90)")
+    .style("font-size", "14px")
     .text("Length of rally");
 });
