@@ -76,7 +76,7 @@ The first challenge of this project was the conception of the database, as most 
 
 D3 is available as a package for Meteor, but not the last version (v.4). I decided therefore to integrate the library from the external and official source code of D3.js. This step took a considerable amount of time as there were some conflicts in terms of loading priorities, and D3.js was generally not ready on time for the plots' generation. This problem was solved thanks to the package "manuelschoebel:wait-on-lib".
 
-Bootstrap is a very useful library for reactive web layout, but at the same time, it was difficult to deal at the same time with D3 graphs' attributes. Current result is that D3 elements are rearranging their positions on the page for smaller resolutions, but not their size and margins.
+Bootstrap is a very useful library for reactive web layout, but at the same time, it was difficult to deal with D3 graphs' attributes. Current result is that D3 elements are rearranging their positions on the page for smaller resolutions, but not their size and margins.
 
 ## Conclusions
 * Meteor framework associated to D3 library works well. Data can be easily found and fetched from MongoDB, but may require a little more preprocessing. Also, D3 v.4 is currently not available as a Meteor package.
