@@ -1,7 +1,8 @@
 # TTStats
 A table tennis match data visualization
 
-Projet pour le cours de visualisation de données, UNIL, printemps 2017.
+Projet pour le cours de visualisation de données, SLI - Faculté des lettres, UNIL, printemps 2017.
+Lien du cours: https://applicationspub.unil.ch/interpub/noauth/php/Ud/ficheCours.php?v_enstyid=53406&v_blocid=11183&v_ueid=174&v_etapeid1=11372&v_langue=fr&v_isinterne=1
 
 ## Description and objectives
 The goal of this project is to produce a web visualization of a table tennis match data, with the help of the JavaScript library "D3.js" (v.4). The main objectives are: 
@@ -10,8 +11,11 @@ The goal of this project is to produce a web visualization of a table tennis mat
   * evaluate the compatibility of D3.js with Meteor framework, MongoDB environment and Bootstrap library.
 
 ## Installation requirements
-- Meteor framework.
+- Meteor framework
 Installation and instructions: https://www.meteor.com/
+- Git
+Clone project from this link: https://github.com/ptalon91/TTStats.git
+Run Meteor in TTStats/TTStats_Meteor folder.
 
 ## Development steps
 
