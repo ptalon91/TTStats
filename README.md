@@ -1,6 +1,8 @@
 # TTStats
 A table tennis match data visualization
 
+![Alt text](https://github.com/ptalon91/TTStats/blob/master/img.png?raw=true)
+
 Projet pour le cours de visualisation de données, SLI - Faculté des lettres, UNIL, printemps 2017.
 
 Lien du cours: https://applicationspub.unil.ch/interpub/noauth/php/Ud/ficheCours.php?v_enstyid=53406&v_blocid=11183&v_ueid=174&v_etapeid1=11372&v_langue=fr&v_isinterne=1
