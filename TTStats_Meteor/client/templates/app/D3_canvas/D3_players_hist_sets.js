@@ -114,9 +114,8 @@ Template.D3PlayersHistSets.onRendered(function() {
         .attr("y", -28)
         .attr("dy", "1.2em")
         .attr("text-anchor", "middle")
-        .text(function(d) { return d;})
-        .attr("fill", "black")
-        .attr("font-size", "1em")
+        .text(function(d) { return "set " +d;})
+        .attr("font-size", "1em");
   }
 
   // Add title to the plot.
